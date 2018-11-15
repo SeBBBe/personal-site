@@ -13,6 +13,9 @@ class Home:
         head = PageHead()
         head.generate(self.page)
 
+        navbar = NavBar()
+        navbar.generate(self.page)
+
         body = PageElement("body")
         p = Paragraph("Hello world!")
         body.insert(p)

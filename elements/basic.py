@@ -15,3 +15,7 @@ class Paragraph(PageElement):
 class Hyperlink(PageElement):
     def __init__(self, reference):
         super().__init__("a", "href=\"" + reference + "\"", "")
+
+class Div(PageElement):
+    def __init__(self):
+        super().__init__("div")
