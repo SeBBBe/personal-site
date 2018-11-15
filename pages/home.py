@@ -11,6 +11,7 @@ class Home:
         self.page.pushtag("html")
 
         head = PageHead()
+        head.insert(Stylesheet("main.css"))
         head.insert(Stylesheet("buttons.css"))
         head.generate(self.page)
 
@@ -18,8 +19,27 @@ class Home:
         navbar.generate(self.page)
 
         body = PageElement("body")
-        p = Paragraph("Hello world!")
-        body.insert(p)
+        coverdiv1 = Div("coverdiv1")
+        name = Paragraph("Sebastian Fabian", "class=\"coverhugetext\"")
+        subtitle = Paragraph("Professional Software Engineer (M.Sc)", "class=\"coversubtitle\"")
+        textcoverdiv1 = Div("covertext")
+        textcoverdiv1.insert(name)
+        textcoverdiv1.insert(subtitle)
+        coverdiv1.insert(Div("distance"))
+        coverdiv1.insert(textcoverdiv1)
+        body.insert(coverdiv1)
+
+        coverdiv2 = Div("coverdiv2")
+        about = Paragraph("Software professional with an M.Sc in Engineering and an eye for details. I never let go of the whole picture, but enjoy making the smallest pieces fit intricately together. During my studies I worked part-time in sales, which has given me an excellent hand with people and improved communication and cooperation skills, which shows in my work driving product testability in my current position. My studies concluded in 2016 with my master thesis concerning route prediction, which resulted in a patented algorithm.", "class=\"coverbread\"")
+        textcoverdiv2 = Div("covertext")
+        textcoverdiv2.insert(about)
+        coverdiv2.insert(Div("distance"))
+        coverdiv2.insert(textcoverdiv2)
+        body.insert(coverdiv2)
+
+        coverdiv3 = Div("coverdiv3")
+        body.insert(coverdiv3)
+
         body.generate(self.page)
 
         self.page.close()

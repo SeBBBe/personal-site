@@ -11,14 +11,12 @@ a.animated-button:link, a.animated-button:visited {
 	padding: 14px 15px;
 	color: #fff;
 	font-size:14px;
-	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 	overflow: hidden;
 	letter-spacing: .08em;
 	border-radius: 0;
-	text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
 	-o-transition: all 1s ease;
@@ -49,16 +47,14 @@ a.animated-button:link, a.animated-button:visited {
 	display: block;
 	margin: 30px auto 0;
 	padding: 14px 15px;
-	color: #fff;
+	color: #000;
 	font-size:14px;
 	border-radius: 0;
-	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 	overflow: hidden;
-	letter-spacing: .08em;
-	text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+	letter-spacing: .12em;
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
 	-o-transition: all 1s ease;
@@ -67,15 +63,15 @@ a.animated-button:link, a.animated-button:visited {
 
 /* Thar Buttons */
 a.animated-button.thar-one {
-	color: #fff;
+	color: #000;
 	cursor: pointer;
 	display: block;
 	position: relative;
-	border: 2px solid #F7CA18;
+	border: 2px solid var(--dark-color2);
 	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 }
 a.animated-button.thar-one:hover {
-	color: #000 !important;
+	color: #fff !important;
 	background-color: transparent;
 	text-shadow: none;
 }
@@ -93,7 +89,7 @@ a.animated-button.thar-one:before {
 	width: 100%;
 	z-index: -1;
 	content: '';
-	color: #000 !important;
-	background: #F7CA18;
+	color: #fff !important;
+	background: var(--dark-color2);;
 	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 }

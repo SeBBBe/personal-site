@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+:root {
+  --dark-color1: #570147;
+  --dark-color2: #1b5299;
+  --soft-color1: #694d75;
+  --soft-color2: #9fc2cc;
+  --soft-color3: #flecce;
+}
+
+div.coverdiv1 {
+    margin: auto;
+    height: 100vh;
+    background-image: url("img/DSCF1875.JPG");
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+div.coverdiv2 {
+    margin: auto;
+    height: 100vh;
+    background-color: var(--soft-color1);
+    color: white;
+}
+
+div.coverdiv3 {
+    margin: auto;
+    height: 100vh;
+    background-image: url("img/DSCF1575.JPG");
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+div.distance {
+    position: relative;
+    height: 30vh;
+}
+
+div.covertext {
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+p.coverhugetext {
+    top: 50%;
+    font-size:40px;
+    font-weight: 200;
+}
+
+p.coversubtitle {
+    font-size:20px;
+    font-weight: 200;
+}
+
+p.coverbread {
+    font-size:20px;
+    font-weight: 200;
+}
+
+div.navbar {
+    float: right;
+    width: 100%;
+    z-index: 10;
+}

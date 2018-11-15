@@ -9,16 +9,16 @@ class PageHead(PageElement):
         super().generate(writer)
 
 class Paragraph(PageElement):
-    def __init__(self, text):
-        super().__init__("p", "", text)
+    def __init__(self, text, param=""):
+        super().__init__("p", param, text)
 
 class Hyperlink(PageElement):
     def __init__(self, reference):
         super().__init__("a", "href=\"" + reference + "\"", "")
 
 class Div(PageElement):
-    def __init__(self):
-        super().__init__("div")
+    def __init__(self, divclass=""):
+        super().__init__("div", ("class=\"" + divclass + "\"" if divclass != "" else ""))
 
 class Stylesheet(PageElement):
     def __init__(self, filename):
