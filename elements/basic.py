@@ -22,4 +22,4 @@ class Div(PageElement):
 
 class Stylesheet(PageElement):
     def __init__(self, filename):
-        super().__init__("link", "rel=\"stylesheet\" type=\"text/css\" href=\"" + filename + "\"", "")
+        super().__init__("link", "rel=\"stylesheet\" type=\"text/css\" href=\"" + filename + "\"", "", False)
