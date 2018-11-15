@@ -11,6 +11,7 @@ class Home:
         self.page.pushtag("html")
 
         head = PageHead()
+        head.insert(Stylesheet("buttons.css"))
         head.generate(self.page)
 
         navbar = NavBar()
