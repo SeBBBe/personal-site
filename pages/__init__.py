@@ -1,1 +1,1 @@
-from pages.home import Page_Home
+from pages.home import Home
