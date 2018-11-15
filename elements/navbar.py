@@ -5,7 +5,7 @@ class NavBar:
         div = Div("navbar")
         spacer = Div("col-md-2 col-sm-2 col-xs-6")
         home = NavButton("home", "index.html")
-        blog = NavButton("blog", "index.html")
+        blog = NavButton("blog", "blog.html")
         div.insert(spacer)
         div.insert(spacer)
         div.insert(spacer)

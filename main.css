@@ -5,7 +5,7 @@
   --dark-color2: #1b5299;
   --soft-color1: #694d75;
   --soft-color2: #9fc2cc;
-  --soft-color3: #flecce;
+  --soft-color3: #f1ecce;
 }
 
 div.coverdiv1 {
@@ -70,4 +70,41 @@ div.navbar {
     float: right;
     width: 100%;
     z-index: 10;
+}
+
+div.blogdiv {
+    margin: auto;
+    height: 100vh;
+    background-color: var(--soft-color2);
+}
+
+div.blogtitledistance {
+    position: relative;
+    height: 113px;
+}
+
+div.blogtext {
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;
+    background-color: white;
+    padding-bottom: 60px;
+}
+
+div.blogtextinner {
+    margin: 0px 60px;
+}
+
+p.blogtitle {
+    font-size:20px;
+    font-weight: 400;
+    margin: 20px 0px;
+    padding-top: 60px;
+    color: var(--dark-color1);
+}
+
+p.blogdate {
+    font-weight: 400;
+    margin: 20px 0px;
+    color: var(--dark-color1);
 }
