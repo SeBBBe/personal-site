@@ -1,6 +1,5 @@
 .DS_Store
 venv
 *.html
-*.css
 __pycache__
 .idea
