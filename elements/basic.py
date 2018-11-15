@@ -1,14 +1,17 @@
 from elements import PageElement
 
-class PageHead:
+class PageHead(PageElement):
+    def __init__(self):
+        super().__init__("head")
     def generate(self, writer):
-        head = PageElement("head")
         title = PageElement("title", "", "Sebastian Fabian")
-        head.insert(title)
-        head.generate(writer)
+        self.insert(title)
+        super().generate(writer)
 
-class Paragraph:
+class Paragraph(PageElement):
     def __init__(self, text):
-        self.elem = PageElement("p", "", text)
-    def generate(self, writer):
-        self.elem.generate(writer)
+        super().__init__("p", "", text)
+
+class Hyperlink(PageElement):
+    def __init__(self, reference):
+        super().__init__("a", "href=\"" + reference + "\"", "")

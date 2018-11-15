@@ -3,13 +3,15 @@ from elements import *
 
 class Home:
     def __init__(self):
-        self.page = HtmlWriter("index.html")
+        self.filename = "index.html"
+        self.page = HtmlWriter(self.filename)
 
     def generate(self):
         self.page.writeline("<!doctype html>")
         self.page.pushtag("html")
 
-        PageHead().generate(self.page)
+        head = PageHead()
+        head.generate(self.page)
 
         body = PageElement("body")
         p = Paragraph("Hello world!")
