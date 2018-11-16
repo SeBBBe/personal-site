@@ -1,6 +1,6 @@
 class HtmlWriter:
     def __init__(self, filename):
-        self.file = open(filename, "w+")
+        self.file = open("output/" + filename, "w+")
         self.tagendings = []
 
     def writeline(self, line):

@@ -27,10 +27,17 @@ div.coverdiv2 {
 div.coverdiv3 {
     margin: auto;
     height: 100vh;
+}
+
+div.coverdiv3img {
+    z-index: -1;
+    margin: -130vh auto;
+    height: 100vh;
     background-image: url("img/DSCF1575.JPG");
     background-size:     cover;
     background-repeat:   no-repeat;
     background-position: center center;
+    opacity: 0.5;
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
     -o-filter: blur(5px);

@@ -13,6 +13,7 @@ class Home:
         head = PageHead()
         head.insert(Stylesheet("main.css"))
         head.insert(Stylesheet("buttons.css"))
+        head.insert(Favicon())
         head.generate(self.page)
 
         navbar = NavBar()
@@ -38,6 +39,12 @@ class Home:
         body.insert(coverdiv2)
 
         coverdiv3 = Div("coverdiv3")
+        construction = Paragraph("This site is a hobby project in progress! I'll spend my weekends working on it :)", "class=\"coverbread\"")
+        textcoverdiv3 = Div("covertext")
+        textcoverdiv3.insert(construction)
+        coverdiv3.insert(Div("distance"))
+        coverdiv3.insert(textcoverdiv3)
+        coverdiv3.insert(Div("coverdiv3img"))
         body.insert(coverdiv3)
 
         body.generate(self.page)
