@@ -14,11 +14,15 @@ html {
 
 div.coverdiv1 {
     margin: auto;
-    height: 100vh;
+    height:100vh;
     background-image: url("img/DSCF1875.JPG");
     background-size:     cover;
     background-repeat:   no-repeat;
     background-position: center center;
+    position:relative;
+    z-index:1;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
 }
 
 div.coverdiv2 {
@@ -41,6 +45,10 @@ div.contact {
     font-size:40px;
     font-weight: 200;
     text-align: center;
+    position:relative;
+    z-index:1;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
 }
 
 div.coverdiv3img {
