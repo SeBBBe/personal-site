@@ -19,6 +19,7 @@ class Post:
         head = PageHead()
         head.insert(Stylesheet("main.css"))
         head.insert(Stylesheet("buttons.css"))
+        head.insert(Stylesheet("blog.css"))
         head.generate(self.page)
 
         navbar = NavBar()

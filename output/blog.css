@@ -1,0 +1,36 @@
+div.blogdiv {
+    margin: auto;
+    height: auto;
+    background-color: var(--soft-color2);
+}
+
+div.blogtitledistance {
+    position: relative;
+    height: 113px;
+}
+
+div.blogtext {
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;
+    background-color: white;
+    padding-bottom: 60px;
+}
+
+div.blogtextinner {
+    margin: 0px 60px;
+}
+
+p.blogtitle {
+    font-size:20px;
+    font-weight: 400;
+    margin: 20px 0px;
+    padding-top: 60px;
+    color: var(--dark-color1);
+}
+
+p.blogdate {
+    font-weight: 400;
+    margin: 20px 0px;
+    color: var(--dark-color1);
+}

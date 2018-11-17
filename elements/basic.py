@@ -35,5 +35,5 @@ class Stylesheet(PageElement):
         super().__init__("link", "rel=\"stylesheet\" type=\"text/css\" href=\"" + filename + "\"", "", False)
 
 class Image(PageElement):
-    def __init__(self, url, width):
-        super().__init__("img", "src=\"" + url + "\"" + " style=\"height:" + width + ";\"", "", False, False)
+    def __init__(self, url, width, divclass=""):
+        super().__init__("img", ("class=\"" + divclass + "\" " if divclass != "" else "") + "src=\"" + url + "\"" + " style=\"height:" + width + ";\"", "", False, False)
