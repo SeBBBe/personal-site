@@ -1,6 +1,7 @@
 from htmlwriter import *
 from elements import *
 
+
 class Post:
     def __init__(self, source):
         self.source = source

@@ -11,10 +11,17 @@ div.coverdiv1 {
     background-repeat:no-repeat;
 }
 
-div.coverdiv2 {
+div.purplecoverdiv {
     margin: auto;
-    height: 100vh;
+    height: auto;
     background-color: var(--soft-color1);
+    color: white;
+}
+
+div.bluecoverdiv {
+    margin: auto;
+    height: auto;
+    background-color: var(--soft-color2);
     color: white;
 }
 
@@ -26,8 +33,7 @@ div.coverdiv3 {
 div.links {
     margin: auto;
     height: auto;
-    background-color: var(--soft-color2);
-    color: white;
+    background-color: var(--soft-color3);
     font-size:40px;
     font-weight: 200;
     text-align: center;

@@ -1,0 +1,27 @@
+Generating a pure HTML/CSS site using Python
+2018/11/15
+<p>When deciding what technology to use for a personal web site, my first thought went to the commercial providers. But then I thought <i>"isn't that quite impersonal?"</i> - being a developer by trade after all. So I decided to build something on my own, even though I am by no means a web designer.</p>
+<p>After some thought, the choice fell on building a tool for generating a web site in <b>pure HTML/CSS</b>. That would perform well! I chose to use <b>Python</b> since I feel it's efficient and well suited for a small project such as this one. Even though I speak <b>Javascript</b> reasonably well, I thought it'd be nice to get more well acquainted with CSS.</p>
+<p>Every page is represented by a Python class and each blog post is generated from a markdown file with a simple parser inside the template class representing a blog post.</p>
+<br>
+<center>
+<figure>
+<img src="blog_img/pageelement_uml.png">
+<figcaption>UML diagram for PageElement superclass</figcaption>
+</figure>
+</center>
+<br>
+<p>Each object in the markup is represented using a PageElement or a subclass thereof. It specifies the tag, parameters and if any content is between the opening and closing tag. It also has a list of other elements which are contained within in element, for example in a div. When the output is generated, the <i>generate</i> method utilizes calls the generate method of all inner elements.</p>
+<pre>
+<code style=display:block;white-space:pre>
+def generate(self, writer):
+&nbsp;&nbsp;if self.tag != "":
+&nbsp;&nbsp;&nbsp;&nbsp;writer.writeline("<" + self.tag + (" " + self.params if self.params != "" else "") + ">")
+&nbsp;&nbsp;if self.content != "":
+&nbsp;&nbsp;&nbsp;&nbsp;writer.writeline(self.content)
+&nbsp;&nbsp;for elem in self.inner:
+&nbsp;&nbsp;&nbsp;&nbsp;elem.generate(writer)
+&nbsp;&nbsp;if self.tag != "" and self.close:
+&nbsp;&nbsp;&nbsp;&nbsp;writer.writeline("</" + self.tag + ">")
+</code>
+</pre>

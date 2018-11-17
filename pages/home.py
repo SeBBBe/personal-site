@@ -1,6 +1,7 @@
 from htmlwriter import *
 from elements import *
 
+
 class Home:
     def __init__(self):
         self.filename = "index.html"
@@ -31,7 +32,7 @@ class Home:
         coverdiv1.insert(textcoverdiv1)
         body.insert(coverdiv1)
 
-        coverdiv2 = Div("coverdiv2")
+        coverdiv2 = Div("purplecoverdiv")
         about = Paragraph(
             "I am a software professional with an M.Sc in Engineering and an eye for details. During my studies I worked part-time in sales, which has given me an excellent hand with people, something I can put to great use in my current work driving product performance and scalability. My studies concluded in 2016 with my master thesis concerning route prediction at a major automotive manufacturer, which resulted in a patented algorithm.",
             "class=\"coverbread\"")
@@ -41,6 +42,7 @@ class Home:
         textcoverdiv2.insert(about2)
         coverdiv2.insert(Div("distance"))
         coverdiv2.insert(textcoverdiv2)
+        coverdiv2.insert(Div("distance"))
         body.insert(coverdiv2)
 
         coverdiv3 = Div("coverdiv3")
@@ -53,15 +55,15 @@ class Home:
         body.insert(coverdiv3)
 
         links = Div("links")
-        iconDistance = PageElement("", "", "    ", False, False)
-        github = Hyperlink("http://www.github.com/sebbbe")
+        icondistance = PageElement("", "", "    ", False, False)
+        github = Hyperlink("http://www.github.com/sebbbe", True)
         github.insert(Image("img/github.png", "100px", "imgbutton"))
-        linkedin = Hyperlink("http://www.linkedin.com/in/sebastianfabian")
+        linkedin = Hyperlink("http://www.linkedin.com/in/sebastianfabian", True)
         linkedin.insert(Image("img/linkedin.png", "100px", "imgbutton"))
         links.insert(Div("small_distance"))
         links.insert(Paragraph("Catch me at:"))
         links.insert(github)
-        links.insert(iconDistance)
+        links.insert(icondistance)
         links.insert(linkedin)
         links.insert(Div("small_distance"))
         body.insert(links)

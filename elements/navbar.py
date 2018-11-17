@@ -1,7 +1,10 @@
 from elements import *
 
+
 class NavBar:
-    def generate(self, writer):
+
+    @staticmethod
+    def generate(writer):
         div = Div("navbar")
         spacer = Div("col-md-2 col-sm-2 col-xs-6")
         home = NavButton("home", "index.html")
@@ -13,6 +16,7 @@ class NavBar:
         div.insert(home)
         div.insert(blog)
         div.generate(writer)
+
 
 class NavButton(PageElement):
     def __init__(self, text, link):

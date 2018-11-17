@@ -3,6 +3,7 @@ from htmlwriter import *
 from elements import *
 from pages import Post
 
+
 class Blog:
     def __init__(self):
         self.filename = "blog.html"
@@ -39,7 +40,8 @@ class Blog:
 
         self.page.close()
 
-    def generatePosts(self, parent):
+    @staticmethod
+    def generatePosts(parent):
         files = os.listdir("content")
         files.sort()
         for filename in files:

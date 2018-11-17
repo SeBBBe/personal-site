@@ -1,5 +1,5 @@
 .DS_Store
 venv
-*.html
+output/*.html
 __pycache__
 .idea
