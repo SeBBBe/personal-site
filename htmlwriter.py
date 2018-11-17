@@ -6,6 +6,9 @@ class HtmlWriter:
     def writeline(self, line):
         self.file.write(line + "\n")
 
+    def write(self, line):
+        self.file.write(line)
+
     def pushtag(self, tag, params = ""):
         self.writeline("<" + tag + (" " + params if params != "" else "") + ">")
         self.tagendings.append("</" + tag + ">")

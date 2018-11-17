@@ -8,6 +8,10 @@
   --soft-color3: #f1ecce;
 }
 
+html {
+    background-color: var(--soft-color2);
+}
+
 div.coverdiv1 {
     margin: auto;
     height: 100vh;
@@ -29,8 +33,17 @@ div.coverdiv3 {
     height: 100vh;
 }
 
+div.contact {
+    margin: auto;
+    height: 30vh;
+    background-color: var(--soft-color2);
+    color: white;
+    font-size:40px;
+    font-weight: 200;
+    text-align: center;
+}
+
 div.coverdiv3img {
-    z-index: -1;
     margin: -130vh auto;
     height: 100vh;
     background-image: url("img/DSCF1575.JPG");
@@ -50,8 +63,13 @@ div.distance {
     height: 30vh;
 }
 
+div.small_distance {
+    position: relative;
+    height: 64px;
+}
+
 div.covertext {
-    width: 50%;
+    width: 70%;
     height: 100%;
     margin: 0 auto;
     text-align: center;
@@ -70,7 +88,7 @@ p.coversubtitle {
 
 p.coverbread {
     font-size:20px;
-    font-weight: 200;
+    font-weight: 300;
 }
 
 div.navbar {
@@ -81,7 +99,7 @@ div.navbar {
 
 div.blogdiv {
     margin: auto;
-    height: 100vh;
+    height: auto;
     background-color: var(--soft-color2);
 }
 

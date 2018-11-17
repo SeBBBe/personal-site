@@ -24,7 +24,7 @@ class Paragraph(PageElement):
 
 class Hyperlink(PageElement):
     def __init__(self, reference):
-        super().__init__("a", "href=\"" + reference + "\"", "")
+        super().__init__("a", "href=\"" + reference + "\"", "", True, False)
 
 class Div(PageElement):
     def __init__(self, divclass=""):
@@ -33,3 +33,7 @@ class Div(PageElement):
 class Stylesheet(PageElement):
     def __init__(self, filename):
         super().__init__("link", "rel=\"stylesheet\" type=\"text/css\" href=\"" + filename + "\"", "", False)
+
+class Image(PageElement):
+    def __init__(self, url, width):
+        super().__init__("img", "src=\"" + url + "\"" + " style=\"height:" + width + ";\"", "", False, False)

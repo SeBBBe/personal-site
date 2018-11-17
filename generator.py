@@ -5,5 +5,3 @@ if __name__ == "__main__":
     home.generate()
     blog = Blog()
     blog.generate()
-    post = Post("content/website.md")
-    post.generate()

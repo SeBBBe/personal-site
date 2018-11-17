@@ -39,9 +39,14 @@ class Blog:
         self.page.close()
 
     def generatePosts(self, parent):
-        for filename in os.listdir("content"):
+        files = os.listdir("content")
+        files.sort()
+        for filename in files:
+            if (filename.split('.'))[-1] != "html":
+                continue
             post = Post("content/" + filename)
             post.generate()
             link = Hyperlink(post.filename)
             link.insert(PageElement("", "", "<i>" + post.date + "</i> " + post.title))
             parent.insert(link)
+            parent.insert(PageElement("br", "", "", False))
