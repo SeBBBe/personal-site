@@ -4,10 +4,10 @@ class HtmlWriter:
         self.tagendings = []
 
     def writeline(self, line):
-        self.file.write(line + "\n")
+        self.write(line + "\n")
 
     def write(self, line):
-        self.file.write(line)
+        self.file.write(line.replace("å", ""))
 
     def pushtag(self, tag, params = ""):
         self.writeline("<" + tag + (" " + params if params != "" else "") + ">")

@@ -101,3 +101,40 @@ p.coverbread {
     font-size:20px;
     font-weight: 300;
 }
+
+div.experience {
+    width: 70%;
+    margin: 0 auto;
+    background-color: white;
+    color: black;
+}
+
+div.experience_side {
+    float: left;
+    height: 100%;
+    font-size:20px;
+    font-weight: 200;
+    padding: 20px;
+}
+
+p.experience_title {
+    font-size:40px;
+    font-weight: 200;
+}
+
+p.experience_company {
+    font-size:20px;
+    font-weight: 300;
+}
+
+p.experience_time {
+    font-size:20px;
+    font-weight: 200;
+}
+
+div.experience_main {
+    height: 100%;
+    font-size:20px;
+    font-weight: 200;
+    padding: 20px;
+}

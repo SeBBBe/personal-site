@@ -1,0 +1,34 @@
+{ "experience":
+  [
+    {
+      "title": "Software Engineer",
+      "company": "Qlik",
+      "time": "Jan 2016 - current",
+      "description": "At Qlik, my main focus is development and maintenance of tools for internal and external performance testing using an agile workflow. Part of this role is advocacy for performance testing within different development teams, and to drive testability and product quality by coordinating different parts of organization. I develop professional load testing tools specifically tailored to Qlik’s commercial software, mainly in .NET/C#. Some of my day-to-day tools include Groovy, Python, Powershell and Golang. As part of our performance monitoring, I have an active role in developing and maintaining our load testing cluster for automated tests. This includes our in-house cluster scheduling software, which I co-authored."
+    },
+    {
+      "title": "Sales Representative",
+      "company": "Länsförsäkringar",
+      "time": "Jan 2012 - Jan 2016",
+      "description": "Proactive insurance brokerage and customer service. I took charge of my own development, and managed to translate this drive into improving sales results over time in an independent and competitive work environment. My role at Länsförsäkringar was very rewarding in allowing to socially engage with customers."
+    },
+    {
+      "title": "Master Thesis Student",
+      "company": "Scania",
+      "time": "Sep 2015 - Dec 2015",
+      "description": "Invented a novel algorithm for predicting the route in a self-learning map system to predict the upcoming road topography and using this data for intelligent cruise control that saves fuel. Built on the in-house expertise at Scania through close cooperation with my supervisor and previous thesis authors. I used Matlab to visualize and evaluate strategies and algorithms and made a prototype in Python to facilitate experimentation."
+    },
+    {
+      "title": "Summer Intern",
+      "company": "Axis Communications",
+      "time": "Jun 2015 - Aug 2015",
+      "description": "Developed tools (Python, C++) to enable the production of full-spectrum (invisible IR light, not just RGB) scenes, and integrated this with an optics simulation pipeline. Ported a Matlab-based camera sensor simulator to Python and SciPy and optimized performance with a factor of 100 over the original implementation."
+    },
+    {
+      "title": "Summer Intern",
+      "company": "Scania",
+      "time": "Jun 2015 - Aug 2015",
+      "description": "Developed an automatic ODX document generation tool (in .NET/C#) that takes raw database data as input. This replaced the previously manual process of producing automotive ECU signal specifications and speeds up the regular release process for ECU software at Scania."
+    }
+  ]
+}

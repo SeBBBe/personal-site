@@ -54,6 +54,11 @@ class Home:
         coverdiv3.insert(Div("coverdiv3img"))
         body.insert(coverdiv3)
 
+        experiencecover = Div("bluecoverdiv")
+        experiences = Experiences()
+        experiencecover.insert(experiences)
+        body.insert(experiencecover)
+
         links = Div("links")
         icondistance = PageElement("", "", "    ", False, False)
         github = Hyperlink("http://www.github.com/sebbbe", True)
