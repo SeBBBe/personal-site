@@ -34,7 +34,11 @@ class Blog:
 
         textdiv.insert(textdivinner)
         blogdiv.insert(textdiv)
+        blogdiv.insert(Div("distance"))
         body.insert(blogdiv)
+
+        body.insert(Links())
+        body.insert(Contact())
 
         body.generate(self.page)
 
