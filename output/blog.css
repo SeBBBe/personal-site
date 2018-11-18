@@ -10,7 +10,7 @@ div.blogtitledistance {
 }
 
 div.blogtext {
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
     text-align: left;
     background-color: white;
@@ -19,6 +19,13 @@ div.blogtext {
 
 div.blogtextinner {
     margin: 0px 60px;
+}
+
+div.navdiv {
+    font-size:20px;
+    font-weight: 300;
+    margin: 0px 60px;
+    text-align: center;
 }
 
 p.blogtitle {

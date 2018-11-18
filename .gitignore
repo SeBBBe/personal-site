@@ -3,3 +3,4 @@ venv
 output/*.html
 __pycache__
 .idea
+*.zip

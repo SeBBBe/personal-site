@@ -7,11 +7,13 @@ Generating a pure HTML/CSS site using Python
 <center>
 <figure>
 <img src="blog_img/pageelement_uml.png">
-<figcaption>UML diagram for PageElement superclass</figcaption>
+<figcaption><i>UML diagram for PageElement superclass</i></figcaption>
 </figure>
 </center>
 <br>
 <p>Each object in the markup is represented using a PageElement or a subclass thereof. It specifies the tag, parameters and if any content is between the opening and closing tag. It also has a list of other elements which are contained within in element, for example in a div. When the output is generated, the <i>generate</i> method utilizes calls the generate method of all inner elements.</p>
+<br>
+<figure>
 <pre>
 <code style=display:block;white-space:pre>
 def generate(self, writer):
@@ -25,3 +27,60 @@ def generate(self, writer):
 &nbsp;&nbsp;&nbsp;&nbsp;writer.writeline("</" + self.tag + ">")
 </code>
 </pre>
+<figcaption><i>Building block for HTML elements</i></figcaption>
+</figure>
+<br>
+<p>Using this structure for page elements makes it easy to create basic subclasses that can be reused over and over again with minimal effort. Take a look at the implementation of hyperlinks, which can then house nested content such as an image or text, or even an entire div.</p>
+<br>
+<figure>
+<pre>
+<code style=display:block;white-space:pre>
+class Hyperlink(PageElement)
+&nbsp&nbspdef __init__(self, reference, tabbed=False):
+&nbsp&nbsp&nbsp&nbspsuper().__init__("a", ("target=\"_blank\" " if tabbed else "") + "href=\"" + reference + "\"", "", True, False)
+</code>
+</pre>
+<figcaption><i>Reusable implementation of hyperlink using the superclass above</i></figcaption>
+</figure>
+<br>
+<p>All of these little building blocks are then put together with CSS to form more sophisticated elements. The advantage of having all this code in Python in the first place, is two-fold</p>
+<p>Firstly snippets like the hyperlink class above can be used many times with a minimum amount of code, and if I ever decide to change it in any way, every hyperlink will update automatically. Secondly, generation of elements can be iterated upon, which is used in many places including this blog section and also the experience section on the front page. Below is code for iterating through a json structure of raw data and building content in HTML elements:</p>
+<br>
+<figure>
+<pre>
+<code style=display:block;white-space:pre>
+class Experiences(Div):
+&nbsp&nbspdef __init__(self):
+&nbsp&nbsp&nbsp&nbspsuper().__init__("experiences")
+&nbsp&nbsp&nbsp&nbspself.insert(Div("distance"))
+&nbsp&nbsp&nbsp&nbsptitlediv = Div("covertext")
+&nbsp&nbsp&nbsp&nbsptitlediv.insert(Paragraph("Experience", "class=\"coverhugetext\""))
+&nbsp&nbsp&nbsp&nbspself.insert(titlediv)
+&nbsp&nbsp&nbsp&nbspself.insert(Div("small_distance"))
+&nbsp&nbsp&nbsp&nbspwith open('content/experience.json') as f:
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdata = json.load(f)
+&nbsp&nbsp&nbsp&nbspfor experiencedata in data["experience"]:
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbspexperience = Experience(experiencedata)
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbspself.insert(experience)
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbspself.insert(Div("small_distance"))
+</code>
+</pre>
+<figcaption><i>Generating elements by iterating through a json array</i></figcaption>
+</figure>
+<br>
+<p>Now, all that's left for me to do is to fill out the raw data about job titles and descriptions into a json array. By adjusting these few lines of code and running the generator script, I can redesign the entire section. And when I have new content to add, I just add it to the json file. When constructing the front page, the code above can be invoked using this trivial snippet to add the section to page:</p>
+<br>
+<figure>
+<pre>
+<code style=display:block;white-space:pre>
+experiencecover = Div("bluecoverdiv")
+experiences = Experiences()
+experiencecover.insert(experiences)
+body.insert(experiencecover)
+</code>
+</pre>
+<figcaption><i>Trivial snippet to add the experience section when generating the front page</i></figcaption>
+</figure>
+<br>
+<p>Some obvious drawbacks of this code is the lack of separation between content and model, and it could be further improved by separating out all the pieces of content such as text snippets and headlines into source files. The reason I went for this approach relates to the limited scope of the project, and it works quite well for a personal website.</p>
+<p>The full Python code for this site can be found at my <a target="_blank" href="http://github.com/sebbbe">GitHub</a></p>

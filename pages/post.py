@@ -12,6 +12,8 @@ class Post:
         self.filename = (self.filename[:75] + '..') if len(self.filename) > 75 else self.filename
         self.filename += ".html"
         self.page = HtmlWriter(self.filename)
+        self.prev = PostMeta()
+        self.next = PostMeta()
 
     def generate(self):
         self.page.writeline("<!doctype html>")
@@ -33,8 +35,33 @@ class Post:
         textdivinner = Div("blogtextinner")
         self.parsemarkdown(textdivinner)
         textdiv.insert(textdivinner)
+
+        navdiv = Div("navdiv")
+
+        if self.prev.title != "":
+            prev = Hyperlink(self.prev.link)
+            prev.content = self.prev.title + " <<"
+            navdiv.insert(prev)
+            navdiv.insert(PageElement("", "", "&nbsp"))
+
+        toc = Hyperlink("blog.html")
+        toc.content = "Table of Contents"
+        navdiv.insert(toc)
+
+        if self.next.title != "":
+            next = Hyperlink(self.next.link)
+            next.content = ">> " + self.next.title
+            navdiv.insert(PageElement("", "", "&nbsp"))
+            navdiv.insert(next)
+
+        textdiv.insert(navdiv)
+
         blogdiv.insert(textdiv)
+        blogdiv.insert(Div("distance"))
         body.insert(blogdiv)
+
+        body.insert(Links())
+        body.insert(Contact())
 
         body.generate(self.page)
 
@@ -54,7 +81,25 @@ class Post:
             elif i == 1:
                 published = Paragraph("Published: " + line + "<br>Author: Sebastian Fabian", "class=\"blogdate\"")
                 parent.insert(published)
+                if self.prev.title != "":
+                    p = Paragraph("")
+                    prev = Hyperlink(self.prev.link)
+                    prev.content = "Previous post: " + self.prev.title
+                    p.insert(prev)
+                    parent.insert(p)
+                if self.next.title != "":
+                    p = Paragraph("")
+                    next = Hyperlink(self.next.link)
+                    next.content = "Next post: " + self.next.title
+                    p.insert(next)
+                    parent.insert(p)
             else:
                 p = PageElement("", "", line)
                 parent.insert(p)
             i += 1
+
+
+class PostMeta:
+    def __init__(self):
+        self.title = ""
+        self.link = ""

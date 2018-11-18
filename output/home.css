@@ -30,31 +30,6 @@ div.coverdiv3 {
     height: 100vh;
 }
 
-div.links {
-    margin: auto;
-    height: auto;
-    background-color: var(--soft-color3);
-    font-size:40px;
-    font-weight: 200;
-    text-align: center;
-    position:relative;
-    z-index:1;
-    background-attachment:fixed;
-    background-repeat:no-repeat;
-}
-
-div.contact {
-    margin: auto;
-    height: auto;
-    background-color: white;
-    font-weight: 200;
-    text-align: center;
-    position:relative;
-    z-index:1;
-    background-attachment:fixed;
-    background-repeat:no-repeat;
-}
-
 div.coverdiv3img {
     margin: -130vh auto;
     height: 100vh;
@@ -67,16 +42,6 @@ div.coverdiv3img {
     z-index:1;
     background-attachment:fixed;
     background-repeat:no-repeat;
-}
-
-div.distance {
-    position: relative;
-    height: 30vh;
-}
-
-div.small_distance {
-    position: relative;
-    height: 64px;
 }
 
 div.covertext {

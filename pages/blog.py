@@ -1,7 +1,7 @@
 import os
 from htmlwriter import *
 from elements import *
-from pages import Post
+from pages import *
 
 
 class Blog:
@@ -30,7 +30,7 @@ class Blog:
         title = Paragraph("Table of Contents", "class=\"blogtitle\"")
         textdivinner.insert(title)
 
-        self.generatePosts(textdivinner)
+        self.generateposts(textdivinner)
 
         textdiv.insert(textdivinner)
         blogdiv.insert(textdiv)
@@ -41,15 +41,28 @@ class Blog:
         self.page.close()
 
     @staticmethod
-    def generatePosts(parent):
+    def generateposts(parent):
         files = os.listdir("content")
         files.sort()
+        posts = []
         for filename in files:
             if (filename.split('.'))[-1] != "html":
                 continue
             post = Post("content/" + filename)
-            post.generate()
             link = Hyperlink(post.filename)
             link.insert(PageElement("", "", "<i>" + post.date + "</i> " + post.title))
             parent.insert(link)
             parent.insert(PageElement("br", "", "", False))
+            posts.append(post)
+        i = 0
+        while i < len(posts):
+            post = posts[i]
+            if i > 0:
+                post.prev.title = posts[i-1].title
+                post.prev.link = posts[i-1].filename
+            if i < (len(posts) - 1):
+                post.next.title = posts[i+1].title
+                post.next.link = posts[i+1].filename
+            i += 1
+        for post in posts:
+            post.generate()

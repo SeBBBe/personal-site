@@ -59,25 +59,8 @@ class Home:
         experiencecover.insert(experiences)
         body.insert(experiencecover)
 
-        links = Div("links")
-        icondistance = PageElement("", "", "    ", False, False)
-        github = Hyperlink("http://www.github.com/sebbbe", True)
-        github.insert(Image("img/github.png", "100px", "imgbutton"))
-        linkedin = Hyperlink("http://www.linkedin.com/in/sebastianfabian", True)
-        linkedin.insert(Image("img/linkedin.png", "100px", "imgbutton"))
-        links.insert(Div("small_distance"))
-        links.insert(Paragraph("Catch me at:"))
-        links.insert(github)
-        links.insert(icondistance)
-        links.insert(linkedin)
-        links.insert(Div("small_distance"))
-        body.insert(links)
-
-        contact = Div("contact")
-        contact.insert(Div("small_distance"))
-        contact.insert(Image("img/contact.png", "100px"))
-        contact.insert(Div("small_distance"))
-        body.insert(contact)
+        body.insert(Links())
+        body.insert(Contact())
 
         body.generate(self.page)
 
