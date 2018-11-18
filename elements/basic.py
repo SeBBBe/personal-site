@@ -7,6 +7,7 @@ class PageHead(PageElement):
 
     def generate(self, writer):
         writer.writeline("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />")
+        writer.writeline("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
         title = PageElement("title", "", "Sebastian Fabian")
         self.insert(title)
         super().generate(writer)

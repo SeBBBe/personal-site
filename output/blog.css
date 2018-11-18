@@ -17,8 +17,14 @@ div.blogtext {
     padding-bottom: 60px;
 }
 
+@media screen and (max-device-width: 800px) {
+    div.blogtext {
+        width: 90%;
+    }
+}
+
 div.blogtextinner {
-    margin: 0px 60px;
+    margin: 0px 5%;
 }
 
 div.navdiv {
