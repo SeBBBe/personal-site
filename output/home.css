@@ -27,25 +27,31 @@ div.bluecoverdiv {
 
 div.coverdiv3 {
     margin: auto;
-    height: 100vh;
-}
-
-div.coverdiv3img {
-    margin: -130vh auto;
-    height: 100vh;
     background-image: url("img/DSCF1575.JPG");
     background-size:     cover;
     background-repeat:   no-repeat;
     background-position: center center;
-    opacity: 0.5;
     position:relative;
     z-index:1;
     background-attachment:fixed;
     background-repeat:no-repeat;
 }
 
+div.coverdiv4 {
+    margin: auto;
+    background-image: url("img/DSCF1005.JPG");
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+    position:relative;
+    z-index:1;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    color: white;
+}
+
 @media screen and (max-device-width: 800px) {
-    div.coverdiv3img {
+    div.coverdiv3 {
         background-attachment:scroll;
     }
     div.coverdiv1 {
@@ -111,4 +117,14 @@ div.experience_main {
     font-size:15px;
     font-weight: 200;
     padding: 20px;
+}
+
+div.langdiv {
+    font-size:40px;
+    font-weight: 200;
+}
+
+span.whitebkg {
+    background-color: white;
+    color: #333333;
 }

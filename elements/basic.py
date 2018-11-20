@@ -48,3 +48,8 @@ class Stylesheet(PageElement):
 class Image(PageElement):
     def __init__(self, url, width, divclass=""):
         super().__init__("img", ("class=\"" + divclass + "\" " if divclass != "" else "") + "src=\"" + url + "\"" + " style=\"height:" + width + ";\"", "", False, False)
+
+
+class Glyphicon(PageElement):
+    def __init__(self, icon):
+        super().__init__("span", "class=\"glyphicon glyphicon-" + icon + "\"")

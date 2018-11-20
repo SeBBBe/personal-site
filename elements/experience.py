@@ -7,11 +7,11 @@ from elements.basic import *
 class Experiences(Div):
     def __init__(self):
         super().__init__("experiences")
-        self.insert(Div("distance"))
+        self.insert(Div("small_distance"))
         titlediv = Div("covertext")
         titlediv.insert(Paragraph("Experience", "class=\"coverhugetext\""))
         self.insert(titlediv)
-        self.insert(Div("small_distance"))
+        self.insert(Div("half_small_distance"))
         with open('content/experience.json') as f:
             data = json.load(f)
         for experiencedata in data["experience"]:

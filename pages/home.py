@@ -46,18 +46,67 @@ class Home:
         body.insert(coverdiv2)
 
         coverdiv3 = Div("coverdiv3")
-        construction = Paragraph("This site is a hobby project in progress! I will spend my weekends working on it :)", "class=\"coverbread\"")
+        construction = Paragraph("These are some of the things I enjoy.", "class=\"coverbread\"")
         textcoverdiv3 = Div("covertext")
         textcoverdiv3.insert(construction)
+        textcoverdiv3.insert(Div("half_small_distance"))
+        table = Table(2, 3)
+        passions = [
+            ("flag", "I speak four (natural) languages!"),
+            ("camera", "Photography"),
+            ("education", "Learning new things"),
+            ("dashboard", "Classic and modern cars"),
+            ("wrench", "Tinkering with things"),
+            ("plane", "Travel")
+        ]
+        passions.reverse()
+        for x in range(table.rows):
+            for y in range(table.cols):
+                passion = passions.pop()
+                div = Div()
+                div.insert(Glyphicon(passion[0]))
+                div.insert(Paragraph(passion[1]))
+                div.insert(Div("half_small_distance"))
+                table.insertat(x, y, div)
+        textcoverdiv3.insert(table)
         coverdiv3.insert(Div("distance"))
         coverdiv3.insert(textcoverdiv3)
-        coverdiv3.insert(Div("coverdiv3img"))
+        coverdiv3.insert(Div("distance"))
         body.insert(coverdiv3)
 
         experiencecover = Div("bluecoverdiv")
         experiences = Experiences()
         experiencecover.insert(experiences)
         body.insert(experiencecover)
+
+        coverdiv4 = Div("coverdiv4")
+        textcoverdiv4 = Div("covertext")
+        textcoverdiv4.insert(Paragraph("I speak these programming languages.", "class=\"coverbread\""))
+        textcoverdiv4.insert(Div("small_distance"))
+        table = Table(4, 2)
+        langauges = [
+            ".NET/C#",
+            "Java",
+            "Golang",
+            "Groovy",
+            "Python",
+            "Javascript",
+            "C",
+            "C++"
+        ]
+        langauges.reverse()
+        for x in range(table.rows):
+            for y in range(table.cols):
+                lang = langauges.pop()
+                div = Div("langdiv")
+                div.insert(PageElement("span", "class=\"whitebkg\"", lang))
+                div.insert(Div("small_distance"))
+                table.insertat(x, y, div)
+        textcoverdiv4.insert(table)
+        coverdiv4.insert(Div("distance"))
+        coverdiv4.insert(textcoverdiv4)
+        coverdiv4.insert(Div("distance"))
+        body.insert(coverdiv4)
 
         body.insert(Links())
         body.insert(Contact())

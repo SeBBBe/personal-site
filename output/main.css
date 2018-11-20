@@ -28,6 +28,11 @@ div.small_distance {
     height: 64px;
 }
 
+div.half_small_distance {
+    position: relative;
+    height: 32px;
+}
+
 div.links {
     margin: auto;
     height: auto;
@@ -60,4 +65,14 @@ img.imgbutton {
 
 img.imgbutton:hover {
     transform: scale(1.5);
+}
+
+table {
+  border: 0px;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.glyphicon {
+    font-size: 50px;
 }
