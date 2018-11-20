@@ -51,6 +51,9 @@ div.coverdiv4 {
 }
 
 @media screen and (max-device-width: 800px) {
+    div.coverdiv4 {
+        background-attachment:scroll;
+    }
     div.coverdiv3 {
         background-attachment:scroll;
     }
