@@ -82,6 +82,11 @@ p.postdescription {
     font-weight: 300;
 }
 
+div.imgdiv {
+    float: right;
+    padding: 20px;
+}
+
 p.sigtext {
     height: 32px;
     display: table-cell;
