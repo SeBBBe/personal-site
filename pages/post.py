@@ -33,10 +33,20 @@ class Post:
         navbar = NavBar()
         navbar.generate(self.page)
 
-        body = PageElement("body", "background=\"" + self.imagesource + "\"")
+        body = PageElement("body")
+        body.insert(PageElement("style", "", "div.coverimg { background-image: url(\"" + self.imagesource + "\");}"))
+        coverimg = Div("coverimg", self.imagesource)
+        title = Paragraph("", "class=\"coversubtitle\"")
+        title.insert(PageElement("span", "class=\"whitebkg\"", self.title))
+        textcoverdiv1 = Div("covertext")
+        textcoverdiv1.insert(title)
+        coverimg.insert(Div("distance"))
+        coverimg.insert(textcoverdiv1)
 
-        blogdiv = Div("")
-        blogdiv.insert(Div("blogtitledistance"))
+        body.insert(coverimg)
+
+        #blogdiv = Div("blogdiv")
+        #blogdiv.insert(Div("blogtitledistance"))
         textdiv = Div("blogtext")
         textdivinner = Div("blogtextinner")
         self.parsemarkdown(textdivinner)
@@ -62,9 +72,9 @@ class Post:
 
         textdiv.insert(navdiv)
 
-        blogdiv.insert(textdiv)
-        blogdiv.insert(Div("distance"))
-        body.insert(blogdiv)
+        #blogdiv.insert(textdiv)
+        #blogdiv.insert(Div("distance"))
+        body.insert(textdiv)
 
         body.insert(Links())
         body.insert(Contact())

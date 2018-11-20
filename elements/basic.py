@@ -36,8 +36,9 @@ class Hyperlink(PageElement):
 
 
 class Div(PageElement):
-    def __init__(self, divclass=""):
-        super().__init__("div", ("class=\"" + divclass + "\"" if divclass != "" else ""))
+    def __init__(self, divclass="", imagesource=""):
+        super().__init__("div", ("class=\"" + divclass + "\" " if divclass != "" else "") +
+                         ("background=\"" + imagesource + "\"" if imagesource != "" else ""))
 
 
 class Stylesheet(PageElement):

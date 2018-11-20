@@ -18,6 +18,13 @@ div.navbar {
     z-index: 10;
 }
 
+div.covertext {
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
 div.distance {
     position: relative;
     height: 30vh;

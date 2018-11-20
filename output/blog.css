@@ -1,13 +1,31 @@
-body {
-    background-size: cover;
+div.coverimg {
+    margin: auto;
+    height:70vh;
+    background-size:     cover;
     background-repeat:   no-repeat;
     background-position: center center;
+    position:relative;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+}
+
+@media screen and (max-device-width: 800px) {
+    div.coverimg {
+        background-attachment:scroll;
+    }
 }
 
 div.blogdiv {
     margin: auto;
     height: auto;
     background-color: var(--soft-color2);
+    background: repeating-linear-gradient(
+        45deg,
+        var(--soft-color1),
+        var(--soft-color1) 10px,
+        var(--dark-color1) 10px,
+        var(--dark-color1) 20px
+    );
 }
 
 div.blogtitledistance {
@@ -73,4 +91,14 @@ p.sigtext {
 img.sigimg {
     margin-right: 10px;
     height: 32px;
+}
+
+p.coversubtitle {
+    font-size:20px;
+    font-weight: 200;
+}
+
+span.whitebkg {
+    background-color: white;
+    color: #333333;
 }
