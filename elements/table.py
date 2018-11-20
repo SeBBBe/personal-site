@@ -2,8 +2,8 @@ from elements import PageElement
 
 
 class Table(PageElement):
-    def __init__(self, rows, cols):
-        super().__init__("table")
+    def __init__(self, rows, cols, divclass=""):
+        super().__init__("table", ("class=\"" + divclass + "\" " if divclass != "" else ""))
         self.rows = rows
         self.cols = cols
         self.elems = {}

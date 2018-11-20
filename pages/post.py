@@ -6,14 +6,19 @@ class Post:
     def __init__(self, source):
         self.source = source
         with open(source) as f:
-            self.title = f.readline()
-            self.date = f.readline()
+            self.title = f.readline().rstrip('\n')
+            self.date = f.readline().rstrip('\n')
+            self.description = f.readline().rstrip('\n')
+            self.imagesource = f.readline().rstrip('\n')
         self.filename = self.title.replace(" ", "-").replace("/", "-").replace("\n", "")
         self.filename = (self.filename[:75] + '..') if len(self.filename) > 75 else self.filename
         self.filename += ".html"
         self.page = HtmlWriter(self.filename)
         self.prev = PostMeta()
         self.next = PostMeta()
+        self.sig_div = Table(1, 2, "collapsetable")
+        self.sig_div.insertat(0, 0, Image("img/profile.jpg", "32px", "sigimg"))
+        self.sig_div.insertat(0, 1, Paragraph("<i>Sebastian Fabian | " + self.date + "</i>", "class=\"sigtext\""))
 
     def generate(self):
         self.page.writeline("<!doctype html>")
@@ -28,8 +33,9 @@ class Post:
         navbar = NavBar()
         navbar.generate(self.page)
 
-        body = PageElement("body")
-        blogdiv = Div("blogdiv")
+        body = PageElement("body", "background=\"" + self.imagesource + "\"")
+
+        blogdiv = Div("")
         blogdiv.insert(Div("blogtitledistance"))
         textdiv = Div("blogtext")
         textdivinner = Div("blogtextinner")
@@ -74,13 +80,13 @@ class Post:
         i = 0
         for line in content:
             if line == "":
-                continue
+                pass
             if i == 0:
                 title = Paragraph(line, "class=\"blogtitle\"")
                 parent.insert(title)
             elif i == 1:
-                published = Paragraph("Published: " + line + "<br>Author: Sebastian Fabian", "class=\"blogdate\"")
-                parent.insert(published)
+                parent.insert(self.sig_div)
+                parent.insert(Paragraph(""))
                 if self.prev.title != "":
                     p = Paragraph("")
                     prev = Hyperlink(self.prev.link)
@@ -93,6 +99,9 @@ class Post:
                     next.content = "Next post: " + self.next.title
                     p.insert(next)
                     parent.insert(p)
+                parent.insert(Div("half_small_distance"))
+            elif i <= 3:
+                pass
             else:
                 p = PageElement("", "", line)
                 parent.insert(p)

@@ -46,8 +46,8 @@ class Stylesheet(PageElement):
 
 
 class Image(PageElement):
-    def __init__(self, url, width, divclass=""):
-        super().__init__("img", ("class=\"" + divclass + "\" " if divclass != "" else "") + "src=\"" + url + "\"" + " style=\"height:" + width + ";\"", "", False, False)
+    def __init__(self, url, height, divclass=""):
+        super().__init__("img", ("class=\"" + divclass + "\" " if divclass != "" else "") + "src=\"" + url + "\"" + " style=\"height:" + height + ";\"", "", False, False)
 
 
 class Glyphicon(PageElement):

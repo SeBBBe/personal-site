@@ -50,7 +50,7 @@ class Home:
         textcoverdiv3 = Div("covertext")
         textcoverdiv3.insert(construction)
         textcoverdiv3.insert(Div("half_small_distance"))
-        table = Table(2, 3)
+        table = Table(2, 3, "stretchtable")
         passions = [
             ("flag", "I speak four (natural) languages!"),
             ("camera", "Photography"),
@@ -83,7 +83,7 @@ class Home:
         textcoverdiv4 = Div("covertext")
         textcoverdiv4.insert(Paragraph("I speak these programming languages.", "class=\"coverbread\""))
         textcoverdiv4.insert(Div("small_distance"))
-        table = Table(4, 2)
+        table = Table(4, 2, "stretchtable")
         langauges = [
             ".NET/C#",
             "Java",

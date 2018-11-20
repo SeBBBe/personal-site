@@ -29,6 +29,7 @@ class Blog:
         textdivinner = Div("blogtextinner")
         title = Paragraph("Table of Contents", "class=\"blogtitle\"")
         textdivinner.insert(title)
+        textdivinner.insert(Div("half_small_distance"))
 
         self.generateposts(textdivinner)
 
@@ -53,10 +54,19 @@ class Blog:
             if (filename.split('.'))[-1] != "html":
                 continue
             post = Post("content/" + filename)
+            postdiv = Div("post")
+            title = Paragraph("", "class=\"posttitle\"")
             link = Hyperlink(post.filename)
-            link.insert(PageElement("", "", "<i>" + post.date + "</i> " + post.title))
-            parent.insert(link)
-            parent.insert(PageElement("br", "", "", False))
+            link.insert(PageElement("", "", post.title))
+            title.insert(link)
+            postdiv.insert(title)
+            postdiv.insert(Paragraph(post.description, "class=\"postdescription\""))
+            sig_div = Table(1, 2, "collapsetable")
+            sig_div.insertat(0, 0, Image("img/profile.jpg", "32px", "sigimg"))
+            sig_div.insertat(0, 1, Paragraph("<i>Sebastian Fabian | " + post.date + "</i>", "class=\"sigtext\""))
+            postdiv.insert(sig_div)
+            parent.insert(postdiv)
+            parent.insert(Div("small_distance"))
             posts.append(post)
         i = 0
         while i < len(posts):

@@ -1,3 +1,9 @@
+body {
+    background-size: cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
 div.blogdiv {
     margin: auto;
     height: auto;
@@ -46,4 +52,25 @@ p.blogdate {
     font-weight: 400;
     margin: 20px 0px;
     color: var(--dark-color1);
+}
+
+p.posttitle {
+    font-size:20px;
+    font-weight: 300;
+}
+
+p.postdescription {
+    font-size:20px;
+    font-weight: 300;
+}
+
+p.sigtext {
+    height: 32px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+img.sigimg {
+    margin-right: 10px;
+    height: 32px;
 }

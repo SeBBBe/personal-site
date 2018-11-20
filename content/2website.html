@@ -1,5 +1,7 @@
 Generating a pure HTML/CSS site using Python
 2018/11/15
+When deciding what technology to use for a personal web site, my first thought went to the commercial providers. But then I thought <i>"isn't that quite impersonal?"</i> - being a developer by trade after all. An explanation of how I built this website with Python and why I built it this way.
+img/DSCF2294.JPG
 <p>When deciding what technology to use for a personal web site, my first thought went to the commercial providers. But then I thought <i>"isn't that quite impersonal?"</i> - being a developer by trade after all. So I decided to build something on my own, even though I am by no means a web designer.</p>
 <p>After some thought, the choice fell on building a tool for generating a web site in <b>pure HTML/CSS</b>. That would perform well! I chose to use <b>Python</b> since I feel it's efficient and well suited for a small project such as this one. Even though I speak <b>Javascript</b> reasonably well, I thought it'd be nice to get more well acquainted with CSS.</p>
 <p>Every page is represented by a Python class and each blog post is generated from a markdown file with a simple parser inside the template class representing a blog post.</p>
@@ -82,5 +84,6 @@ body.insert(experiencecover)
 <figcaption><i>Trivial snippet to add the experience section when generating the front page</i></figcaption>
 </figure>
 <br>
+<p>This approach also allows for some cool things like inserting custom navigation panels into each blog post, where I can link to the previous and next post. I could also do things like showing a preview of the next post on the right hand side of the page of the current blog post.</p>
 <p>Some obvious drawbacks of this code is the lack of separation between content and model, and it could be further improved by separating out all the pieces of content such as text snippets and headlines into source files. The reason I went for this approach relates to the limited scope of the project, and it works quite well for a personal website.</p>
 <p>The full Python code for this site can be found at my <a target="_blank" href="http://github.com/sebbbe">GitHub</a></p>
