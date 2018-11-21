@@ -7,7 +7,7 @@
 a.animated-button:link, a.animated-button:visited {
 	position: relative;
 	display: block;
-	margin: 30px auto 0;
+	margin: 30px auto 30px;
 	padding: 14px 15px;
 	color: #fff;
 	font-size:14px;
@@ -45,7 +45,7 @@ a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
 a.animated-button:link, a.animated-button:visited {
 	position: relative;
 	display: block;
-	margin: 30px auto 0;
+	margin: 30px auto 30px;
 	padding: 14px 15px;
 	color: #000;
 	font-size:14px;
@@ -70,16 +70,21 @@ a.animated-button.thar-one {
 	border: 2px solid var(--dark-color2);
 	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 }
-a.animated-button.thar-one:hover {
-	color: #fff !important;
-	background-color: transparent;
-	text-shadow: none;
+
+
+@media screen and (min-device-width: 800px) {
+    a.animated-button.thar-one:hover {
+        color: #fff !important;
+        background-color: transparent;
+        text-shadow: none;
+    }
+    a.animated-button.thar-one:hover:before {
+        bottom: 0%;
+        top: auto;
+        height: 100%;
+    }
 }
-a.animated-button.thar-one:hover:before {
-	bottom: 0%;
-	top: auto;
-	height: 100%;
-}
+
 a.animated-button.thar-one:before {
 	display: block;
 	position: absolute;

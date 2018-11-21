@@ -18,14 +18,9 @@ div.coverimg {
 div.blogdiv {
     margin: auto;
     height: auto;
-    background-color: var(--soft-color2);
-    background: repeating-linear-gradient(
-        45deg,
-        var(--soft-color1),
-        var(--soft-color1) 64px,
-        var(--dark-color1) 64px,
-        var(--dark-color1) 128px
-    );
+    background-color: white;
+    background-image: url("img/DSCF1984.JPG");
+    background-size:     cover;
 }
 
 div.blogtitledistance {

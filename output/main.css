@@ -32,12 +32,12 @@ div.distance {
 
 div.small_distance {
     position: relative;
-    height: 64px;
+    height: 60px;
 }
 
 div.half_small_distance {
     position: relative;
-    height: 32px;
+    height: 30px;
 }
 
 div.links {
