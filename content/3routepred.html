@@ -1,0 +1,273 @@
+Predicting the most likely route with a self-learning map
+2018/11/24
+How I invented (and patented) a system for a major automotive manufacturer to save precious drops of fuel by learning the ins and outs of the commonly traveled road. Or - cool things I discovered working on my master's thesis!
+blog_img/_N8J8946.JPG
+<p><i>This post aims to explain the premise and findings of my master thesis around route prediction. I carried out this work at a major automotive manufacturer, Scania, which manufactures heavy-duty vehicles, namely trucks. Some background &ndash; in order to save precious drops of fuel, it is desirable to be able to predict upcoming road slopes whether they are inclines or declines. For inclines, it&rsquo;s advisable to speed up a little and make any gear shifts before entering the climb so as not to lose valuable momentum. For declines, it&rsquo;s a good idea to let off the throttle a bit before the hill crest so that no braking (exhaust brake or no) is required to comply with local speed limits during the downhill.</i></p>
+
+<p>Doing all of these things right may save you some small percentage, or fraction of a percentage, of fuel. And while it might not be much, considering fuel prices, profit margins in the transport sector and sizes of fleets at large shipping companies, the effort is more than worthwhile. Of course, rougher terrain might entail saving great amounts of fuel. Coincidentally, those places are such where high quality topographical maps might be least attainable. In this case, Brazil is a major market that has both rough roads with steep hillsides and no readily available topographic maps. The challenge was to build a self-learning system that would learn the topography as the vehicle drove through an area several times. In addition to this, it would also learn the route that the driver would take a learn to predict it. Combining these two things would yield a stream of topographical data so that the vehicle would be aware of the slope in the upcoming stretch of road &ndash; it would know when there would be an incline or decline, how steep it would be and when the vehicle would reach it. This data would then be fed into other systems such as the gearbox controller.</p>
+
+<h2>The system</h2>
+
+<p>Basically, the desired system is as follows:</p>
+
+<p>
+     <ol>
+  <li>Predict where the driver will go</li>
+  <li>Predict the road slope for this route</li>
+  <li>Feed back to improve prediction the next time</li>
+</ol>
+</p>
+
+<p>To illustrate the system, a simple drawing can be made. The input to the system is the current position of the vehicle, and the output is a stream of slopes, or what we call as horizon.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/predictive_block.png" width="70%">
+<figcaption><i>A high-level view of the system</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>Internally, the system block also saves the previous input data point to calculate a direction of travel, which is used for determining the predicted route. Additionally, the current slope measure by vehicle on-board sensors is also recorded for the purpose of improving the prediction and building the internal topographical map, although this part is not strictly required for the consumption of the current pass-through.</p>
+
+<p>The way I was able to build a system fulfilling these specifications and perform better than any other previous system was to employ a novel use of heat maps. By recording travel data in four discreet layers, the prediction can handle a variety of different conditions covering everything from highly complex quarries to regular highway driving.</p>
+
+<p>The methodology of the project was to prototype as software solution using a simple simulation tool I implemented in Python and to feed it with data recorded from actual trucks. This data consisted of several runs on a highway stretch that I could use to train the system. I would then estimate the efficacy of my implemented solution by playing back a previously unplayed recording of a similar route and measure the difference of the predicted road slope and the actual slope of the recorded data.</p>
+
+<p>To illustrate the result of this methodology, as well as the performance of the system developed, here is a chart that shows the road slope as a function of distance that the vehicle as traveled over stretch of a few kilometers, compared to the (by the system) predicted road slope of the same stretch of road, after being trained a couple of times driving a similar route. This includes both route prediction and the subsequent slope prediction.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/prediction.png" width="70%">
+<figcaption><i>Illustrating the experimental result from the simulation tool</i></figcaption>
+</figure>
+</center>
+<br>
+
+<h2>Heat maps</h2>
+
+<p>I was able to achieve this result, after much trial and error, using a methodology based on heat maps. A heat map (first named in a patent by Kinney [11]) is a raster matrix that stores a frequency value (&ldquo;heat&rdquo;) for each element. It is typically used for visualization of data sets, particularly to map frequency of a certain occurrence or prevalence in a two dimensional plane. The name is derived from the common display of such heat maps as colored over- lays ranging from blue (cold) to red (hot), indicating a range of relative frequency. For a route finding application, each time the pixel is passed through, this value in incremented. The heat, then, represents the probability of travel for that particular pixel in the map.</p>
+
+<p>A novel approach to route prediction based on the historical frequency of travel through each pixel is developed by constructing a number of heat maps, each representing a different range of possible vehicle headings. When the vehicle travels through a pixel, its heading is calculated and used to increase the heat in the heat map most closely corresponding to that direction.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/4dmap.png" width="70%">
+<figcaption><i>Four heat maps, for four different directions, showing the likelihood of travel. Map data: Google</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>As the vehicle is driving, one of these four heat maps is selected depending on the direction of travel. That heat map then serves as the basis for predicting the most likely pixel of the maps that the vehicle will reach next. This is illustrated nicely in a figure contained in the patent</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/patent_img.png" width="70%">
+<figcaption><i>Illustration of heat maps from my patent</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>Another interested way to visualize the result of the system is to ignore the road slope prediction for a second and focus on the actual route prediction. This can be illustrated in a graphical way using an overlay on a map. Take a look at this example were a vehicle is traveling along a highway junction. The large blue dot represents the current position of the vehicle at the time t, with its tail of blue dots showing previously recorded positions at t-1. The prediction is shown as red dots, with the actual prediction resolution shown as the distance between the discrete dots. The green dots are the recorded actual vehicle positions in t+1.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/bridge.png" width="70%">
+<figcaption><i>Performance of the route prediction at a highway junction. Map data: Google</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>To enable the learning part of the system, each time the system records a new data point consisting of the vehicle position and current road slope measurement, one of the heat maps is recalled according to the most suitable current driving direction.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/heatmap-fill.png" width="70%">
+<figcaption><i>Choosing one of four directional heat maps</i></figcaption>
+</figure>
+</center>
+<br>
+
+<h2>Pixel magic</h2>
+
+<p>We then divide the map into pixels to be able to treat it like a raster map. But first, some magic is required. Dividing the earth into Cartesian coordinates evenly along the longitude results in vastly different horizontal pixel sizes, meaning pixels in for example Scandinavia will be smaller than those at the equator. For consistent per- formance, equal pixel sizes are desired. This is accomplished by a longitude correction factor. The number of pixels is calculated as:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form1.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>for a correction factor &#948;. The correction factor uses a spherical approximation of the earth, with a cross-sectional circle:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form2.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>setting r = 1 means that the pixel size, sizepixel, will approximately hold everywhere in our coordinate system. This means that:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form3.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>Since the latitude ranges 90&#9702; in each direction as in Equation 3.13, assigning x as in Equa- tion 3.12 means that x will range from 0 at the poles of the earth, to 1 at the equator. It follows, then, that the pixel size (Equation 3.9) will be corrected by having fewer pixels closer to the poles.</p>
+
+<p>Since there is an inherent sparseness of data depending on the number of previous runs through that particular road, as well as challenges predicting the next likely pixel of an pixel-by-pixel basis using no memory than the current direction of travel, pixel size has to be chosen appropriately, and smaller is not always better. Some experimentation led me to use a 20 by 20 meter pixel size. This is pretty large but I found that the variation in slope prediction is so low that going smaller doesn&rsquo;t really improve accuracy that much and this keeps the route prediction part working well.</p>
+
+<p>When the prediction is made, the corresponding directional heat map is used to calculate the next likely pixel. First, the correct heat map is determined by calculating the current heading and assigning it to one of the predefined directions, depending on the number of directions in the directional heat map. For each possible next pixel candidate, the heat is computed as such:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form4.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>where vcurrent is the current direction vector and vcandidate is a vector drawn between the current pixel and the candidate pixel as in Equation 3.28. Take &#8736;[vcurrent, vcandidate] as the closest absolute angle between the vectors, such that Equation 3.29 holds.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form5.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>&#945; is a parameter that sets a minimum multiplier. This means the heat of the direction corresponding to the current heading will be multiplied by a factor:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form6.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>the purpose of which is to give priority to a prediction that continues the current heading approximately, which is almost always true at a pixel level. The current direction is calculated as a the angle between the current pixel and a pixel n places back (sliding window). This is kept track of using a queue. The distance n between which the angle is calculated determines the granularity due to aliasing, and also willingness to change direction.</p>
+
+<p>The method of obtaining the raw data, as described by Sahlholm [18], is based on esti- mation from several input signals and unusable during certain circumstances such as in between gear changes. This means that some gaps in the stream of input data are to be ex- pected, resulting in &ldquo;skipped&rdquo; pixels, which will not be updated with historical route data. In order to rectify this, a line interpolation algorithm is utilized to calculate which pix- els were likely passed between two consecutive recorded points, and their data is updated accordingly.</p>
+
+<p>The problem can be reduced to drawing a straight line between two points, on a mesh grid. This is done using the Bresenham [3] line drawing algorithm, which is commonly used in computer graphics implementations for drawing non-anti aliased lines with high performance. Because a line can be expressed as movement along the y axis and x axis on a two dimensional plane, if we define movement along the x axis to be constant, the line then becomes a function of y. The line can be expressed as:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form11.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>for the starting point (x0, y0) and end point (x1, y1).</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/wo_bresenham.png" width="70%">
+<figcaption><i>Raw recorded data without any interpolation</i></figcaption>
+</figure>
+</center>
+<br>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/w_bresenham.png" width="70%">
+<figcaption><i>Recorded data interpolated filled in with the Bresenham line drawing algorithm</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>Another thing that needs to be taken into account, that may not be apparent at first, is the entry and exit point into the pixels itself. Since the pixels I ended up using were rather large (20 x 20 meters), the entry and exit location matter and are going to affect the next predicted pixel. See the following figure for a more intuitive explanation of why this is.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/pixelpoints.png" width="70%">
+<figcaption><i>The entry and exit points of the pixel matters!</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>In order to find the most probable subsequent pixel, a linear extrapolation from the internal point in the current bearing is drawn. This is done by forming an expression of the line:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form7.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>and using a first degree polynomial:</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form8.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>to find the possible exit points for the assumed travel through the pixel. The exit points are characterized by being points on the border of the pixel, and thus must fulfill the following condition, which gives four possible points.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form9.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>The sought after point can be found by virtue of not being outside the pixel borders, as well as conforming to the correct direction. Once the exit point is found, the next pixel is known because it will be the pixel sharing the same border as the one of the exit point. This pixel is then selected as the hypothetical next pixel to continue calculating the horizon from the previous pixel in the horizon. In order to yield a correct result from now on, the entrance point of the pixel is used as a starting point from which the route continues in the predicted direction through that particular pixel. Using the previous exit point, the entrance point is found using Algorithm 3.1.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/form10.png" width="70%">
+</figure>
+</center>
+<br>
+
+<p>The discrete approach simply uses the recorded value and weighs it against the previous stored value with some inertial parameter &#945;.</p>
+
+<p>The end result of all of this is a bunch of pixels with a bunch of slopes, one for each. This needs to be translated into a stream of slope values with equal distance to one another. To accomplish this, I experimented with linear and polynomial interpolation using least squares fitting, as well as splines of different orders. The problem with the more sophisticated distance estimation methods were that they tended to give a more accurate fit between a limited number of points, and thus a smaller distance. This meant that the horizons generated using these estimation techniques were simple too short and gave highly inaccurate results for that reason. I ended up using a basic linear interpolation as this seemed to produce good results.</p>
+
+<p>A big challenge in this project was to find a suitable method for the sparse map data produced by learning a map basic on a limited local subset.</p>
+
+<p>To address the sparse data created by traveling through a highly limited number of points through a large area (in essence, all of earth), some approach is needed to make the process both computationally quick and efficient, storage-wise.</p>
+
+<p>Quadtrees are a strategy to storing and quickly accessing items at coordinate points. It is an extension of the binary tree with four leaves at each node. It was first named by Finkel and Bentley [6] and although most applications (especially GIS) use quadtrees for two dimensional spaces, it is trivially extensible to any desired dimension.</p>
+
+<p>A two dimensional quadtree, which will be relevant to the implementation in this project, divides the two dimensional plane in four quadrants at each level, making search quick. It is a tree data structure where each node comprises four children. Each level then divides its space into four new quadrants, and this sub division is continued for a number of levels. The bottom most leaves in the tree, as a consequence of a limited number of levels, can theoretically hold any amount of items. Therefore a trade-off is required in choosing the number of levels. One does not want each node to contain too many items, as these need to be searched through by brute force to find the final desired item. On the other hand, too many levels also add additional time to find an item since more level need to be iterated through.</p>
+
+<p>I hope this was an interesting and reasonably digestible article. My full thesis dives deeper into:
+<ul>
+  <li>Most efficient heat maps</li>
+  <li>Ideal prediction length</li>
+  <li>How to deal with tight spots and loops in the route</li>
+  <li>Best transmission techniques for limited bandwidth </li>
+  <li>Efficient storage for embedded C applications</li>
+  <li>Storage and aging of slope data</li>
+</ul>
+</p>
+
+<h2>Links</h2>
+<p><a target="_blank" href="thesis.pdf">Read my full thesis</a></p>
+<p><a target="_blank" href="http://was.prv.se/spd/patent?p1=gacZ1hOMTYd7eM42P9NdVA&hits=true&tab=1&content=sebastian+fabian&lang=en&hitsstart=0&start=0">See my patent</a></p>

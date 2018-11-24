@@ -49,6 +49,7 @@ class Blog:
     def generateposts(parent):
         files = os.listdir("content")
         files.sort()
+        files.reverse()
         posts = []
         for filename in files:
             if (filename.split('.'))[-1] != "html":
