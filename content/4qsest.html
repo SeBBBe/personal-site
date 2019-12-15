@@ -1,0 +1,59 @@
+Load testing joins the 21st century
+2019/12/15
+Marrying enterprise software with modern convenience. Presenting a new cross-platform load testing tool built with Electron and Golang WebAssembly.
+blog_img/qsest.png
+<p>At the Performance & Scalability team, custom load testing tools are our bread and butter. They are what allow us to make accurate assessments of software behavior under all kinds of loads, usage scenarios, network topologies and hardware configurations. We use this knowledge to guide the development of our company's offerings and offer advice to customers on how to enable what they need their system to handle.</p>
+
+<p>There are a few ways to look at the output of the team. In one sense, our main deliverable is knowledge. Internally, we develop our own software that lays the foundation of gathering this knowledge. But this software is also publicly offered as a way for customers to simulate and assess their own environments.</p>
+
+<p>The main component of such testing is one of our command-line based load testers:</p>
+
+<ul>
+  <li>SDKExerciser</li>
+  <li>Gopherciser</li>
+</ul>
+
+<p>One is built directly towards our SDK and the other is built in Golang with our enigma.go framework.</p>
+
+<p>I have co-authored both of these tools and this fall I was tasked with coming up with a graphical application to wrap the powerful functionality of the Gopherciser. Through working with customers, both internal and external, I had a good idea of the obstacles and limitations of our current solution. I wanted to move beyond our .NET-based, Windows-only XAML offering for the SDKExerciser and bring something fresh and attractive that would be more in-line with contemporary applications.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/lightscript.png" width="70%">
+<figcaption><i>Introducing Qlik Sense Enterprise Scalability Tools</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>Introducing Qlik Sense Enterprise Scalability Tools (it's a mouthful, I know!). By observing how people work with our legacy tools, the new one is redesigned to be more intuitive and to enable a shorter learning curve. This is why I feel bringing contemporary design practices, even to enterprise software, is key. When software is well design, it contains everything you need, and nothing you don't. The aim is for the user to immediately understand how to use the software by building on familiar conventions and affordance.</p>
+
+<h2>The design</h2>
+<p>Editing load scripts is divided into three panes, each following a logical flow of building up the script. The first pane presents the user with the connection settings. This allows the user to set up the basics and test the connection before going further. Presenting only information relevant to connecting and authenticating to the target system-under-test strips away distractions and avoids overwhelming the user.</p>
+
+<p>The second pane contains information about usernames, how many iterations to execute, timeouts, logging settings and other high-level script settings</p>
+
+<p>Finally, the third pane is the scenario editor. This pane contains a linear flow of the actions each simulated user will perform. By utilizing a modern design language and incorporating visually responsive drag and drop, understanding how to add, remove and rearrange actions can be immediately understood.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/darkscript.png" width="70%">
+<figcaption><i>It just wouldn't be 2019 without dark mode</i></figcaption>
+</figure>
+</center>
+<br>
+
+<h2>Golang WebAssembly</h2>
+<p>The tool integrates with our Golang-based Gopherciser tool using a shimmy written in Golang that is compiled to WebAssembly. With this strategy, the frontend can be fed information straight from the code that holds all type definitions and structs. This has the advantage that the script state held in memory is guaranteed to valid when loading the script for execution.</p>
+
+<p>The data is consumed using reflection in the WASM side of things, and marshaled into a json format. Properties such as types, default values and struct members are annotated within. Using this shimmy, data can be sent back and forth between the web world and the Golang world.</p>
+
+<p>After the data has been fed to the main frontend code, written in Typescript, angular reactive forms are used to dynamically construct the input forms. Some parts, like the connection and user panes, are manually laid out and then complemented with an additional dynamic form. The reason behind this design is that if properties are added to the Gopherciser without updating the HTML, those properties will still appear, albeit in a less beautiful layout.</p>
+
+<h2>What's next?</h2>
+
+<p>This blog post coincides with the first public release of Qlik Sense Enterprise Scalability Tools, which I will continue to iteratively build. The next step is to integrate a script executor so that the command-line tool can be controlled without actually going to a terminal. Of course, we're always excited about feedback! Check the link below.</p>
+
+<h2>Links</h2>
+<p><a target="_blank" href="https://community.qlik.com/t5/Qlik-Scalability/Qlik-Sense-Enterprise-Scalability-Tools/gpm-p/1579916#M1610">Download Qlik Sense Enterprise Scalability Tools and try it yourself!</a></p>
