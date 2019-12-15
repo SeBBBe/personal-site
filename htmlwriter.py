@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 class HtmlWriter:
     def __init__(self, filename):
         self.file = open("output/" + filename, "w+")

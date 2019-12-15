@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 class PageElement:
     def __init__(self, tag, params="", content="", close=True, newline=True):
         self.inner = []
