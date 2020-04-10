@@ -1,0 +1,143 @@
+Open sourcing our highly scalable Go-based user sim
+2020/04/09
+Today is a good day to go open source! Our user sim is widely used inside and outside the company to leave no stone unturned when it comes to characterizing performance.
+blog_img/qsstanalyzer1.png
+<p>A day we've been working towards for so long finally arrived and I'm proud to present the source code of our state-of-the-art specialized load simulation tool - Gopherciser.</p>
+
+<p>It's the highly customizable, highly performant user simulator specifically made for Qlik Sense. With the Gopherciser, you are able to simulate almost any usage pattern at almost any scale imaginable - right out of the box. Want to see what happens when 5,000 sales reps at your (huge) company log on and check their weekly sales data? Within the same hour? Half an hour? No scenario is too ambitious. The tool will effortlessly scale out to enterprise-level scenarios on even modest hardware.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/gopherciser.png" width="70%">
+<figcaption><i>Gopherciser goes for the smash!</i></figcaption>
+</figure>
+</center>
+<br>
+
+<h2>Performance</h2>
+
+<p>Writing software to benchmark performance places incredibly high demands on the performance of the tool itself.</p>
+
+<p>Gopherciser is written exclusively in Go and made to utilize modern hardware with its highly multi-threaded nature. We make liberal use of goroutines to schedule user load in parallel. Every effort and countless of hours have been spent benchmarking and optimizing away any points of contention to make sure Gopherciser can reveal any bottleneck in your setup - not create ones. The result is an extremely lean piece of software.</p>
+
+<h2>Ease of use</h2>
+
+<p>Getting up and running with the Gopherciser is straight forward. The easiest place to start is to use our integrated tool offering as covered in a previous blog post - Qlik Sense Enterprise Scalability Tools.</p>
+
+<br>
+<center>
+<figure>
+<video width="70%" autoplay loop>
+<source src="blog_img/dragdrop.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<figcaption><i>Editing Gopherciser scenarios graphically</i></figcaption>
+</figure>
+</center>
+<br>
+
+<p>Advanced users may prefer working directly in the JSON format that the Gopherciser uses. The structure is very readable and I think it even speaks for itself. The thorough documentation available in the GitHub repository goes in depth on each possible scenario action.</p>
+
+<br>
+<figure>
+<pre>
+<code style=display:block;white-space:pre>
+&quot;scenario&quot;: [
+&nbsp&nbsp{
+&nbsp&nbsp&nbsp&nbsp&quot;action&quot;: &quot;elasticopenhub&quot;
+&nbsp&nbsp},
+&nbsp&nbsp{
+&nbsp&nbsp&nbsp&nbsp&quot;action&quot;: &quot;elasticexplore&quot;,
+&nbsp&nbsp&nbsp&nbsp&quot;settings&quot;: {
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&quot;keepcurrent&quot;: false,
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&quot;paging&quot;: false,
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&quot;sorting&quot;: &quot;created&quot;,
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&quot;owner&quot;: &quot;all&quot;
+&nbsp&nbsp&nbsp&nbsp}
+&nbsp&nbsp},
+&nbsp&nbsp{
+&nbsp&nbsp&nbsp&nbsp&quot;action&quot;: &quot;openapp&quot;,
+&nbsp&nbsp&nbsp&nbsp&quot;settings&quot;: {
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&quot;appmode&quot;: &quot;name&quot;,
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&quot;app&quot;: &quot;My app&quot;
+&nbsp&nbsp&nbsp&nbsp}
+&nbsp&nbsp},
+&nbsp&nbsp{
+&nbsp&nbsp&nbsp&nbsp&quot;action&quot;: &quot;changesheet&quot;,
+&nbsp&nbsp&nbsp&nbsp&quot;settings&quot;: {
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&quot;id&quot;: &quot;abc&quot;
+&nbsp&nbsp&nbsp&nbsp}
+&nbsp&nbsp&nbsp&nbsp}
+]
+</code>
+</pre>
+<figcaption><i>Composing a custom scenario manually is clean and straight forward</i></figcaption>
+</figure>
+<br>
+
+<h2>Extensibility</h2>
+
+<p>Gopherciser has been designed with extensibility in mind. In the past, testing Qlik Sense solutions with customized components has been a bit tricky. There was the choice of using official tools to test native Qlik Sense apps, or having to start from scratch and building your own logic for testing your complete solution including any custom part. The extensible nature of Gopherciser makes it easier to implement your own logic for custom components and combine it with the power of the existing functionality.</p>
+
+<p>To implement your own user action, a simple interface with two methods needs to be implemented:</p>
+
+<ul>
+  <li>Validate - This method runs on your struct to validate its settings. For example, you may check that the user didn't forget to specify any required parameters or that a specified file exists.</li>
+  <li>Execute - This method is what actually runs when the user executes your action. A number of parameters are passed to this method - the sessionState which contains information about the current user session, actionState which contains an information scope to this one action execution and reports status for logging and connectionSettings which provides you with overall connection settings such as the current hostname.</li>
+</ul>
+
+<br>
+<figure>
+<pre>
+<code style=display:block;white-space:pre>
+// ActionSettings scenario action interface for mandatory methods
+ActionSettings interface {
+&nbsp&nbsp// Execute action
+&nbsp&nbspExecute(sessionState *session.State, actionState *action.State, connectionSettings *connection.ConnectionSettings, label string /* Label */, reset func() /* reset action start */)
+&nbsp&nbsp// Validate action
+&nbsp&nbspValidate() error
+}
+</code>
+</pre>
+<figcaption><i>ActionSettings interface</i></figcaption>
+</figure>
+<br>
+
+<p>There are basically two modes of communication commonly used. REST APIs and Sense interaction through Enigma-go. Enigma-go is an SDK-like open source library for dealing with Qlik Sense functionality that underpins much of the Gopherciser.</p>
+
+<p>I suggest looking at an existing action such as ClearAll for a concise example of how to work with the interface and enigma-go functionality! The action can then be registered through an init method as such:</p>
+
+<br>
+<figure>
+<pre>
+<code style=display:block;white-space:pre>
+scenario.RegisterActions(
+&nbsp&nbspmap[string]scenario.ActionSettings{
+&nbsp&nbsp&nbsp&quot;myaction&quot;: MyActionSettings{},
+&nbsp&nbsp})
+</code>
+</pre>
+<figcaption><i>Registering your custom action</i></figcaption>
+</figure>
+<br>
+
+<h2>Analysis</h2>
+
+<p>All right, so you've written custom actions, composed scenarios and ran then. What now?</p>
+
+<p>In the spirit of using our own products to our advantage, Qlik Sense provides the perfect mechanic for analyzing the results in detail. Using our publicly available analyzer apps, loading the Gopherciser log file and consuming the results is as easy as a few clicks. It's easy to analyze response time percentiles, changes over time and hardware performance metrics.</p>
+
+<br>
+<center>
+<figure>
+<img src="blog_img/qsstanalyzer3.png" width="70%">
+<figcaption><i>Analyzing execution results in Qlik Sense</i></figcaption>
+</figure>
+</center>
+<br>
+
+<h2>Links</h2>
+<p><a target="_blank" href="https://github.com/qlik-oss/gopherciser">Fork Gopherciser and make something awesome!</a></p>
+<p><a target="_blank" href="https://community.qlik.com/t5/Qlik-Scalability/Qlik-Sense-Enterprise-Scalability-Tools/gpm-p/1579916#M1610">Get the Gopherciser binary and GUI with our Qlik Sense Enterprise Scalability Tools package</a></p>
+<p><a target="_blank" href="https://community.qlik.com/docs/DOC-15451">Our Qlik Sense based result analyzer apps</a></p>
