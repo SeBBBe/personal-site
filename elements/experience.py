@@ -5,7 +5,6 @@ import json
 
 from elements.basic import *
 
-
 class Experiences(Div):
     def __init__(self):
         super().__init__("experiences")
@@ -22,15 +21,19 @@ class Experiences(Div):
             self.insert(Div("small_distance"))
 
 
-class Experience(Div):
+class Experience(Table):
     def __init__(self, json):
         super().__init__("experience")
-        side = Div("experience_side")
+        side = Td("experience_side")
         side.insert(Paragraph(json["title"], "class=\"experience_title\""))
         side.insert(Paragraph(json["company"], "class=\"experience_company\""))
         side.insert(Paragraph(json["time"], "class=\"experience_time\""))
-        main = Div("experience_main")
+        main = Td("experience_main")
         main.insert(Paragraph(json["description"]))
+
+        row = Tr()
+        row.insert(side)
+        row.insert(main)
 
         self.insert(side)
         self.insert(main)

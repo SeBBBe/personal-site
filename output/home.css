@@ -78,24 +78,34 @@ p.coverbread {
     font-weight: 300;
 }
 
-div.experience {
+table.experience {
     width: 70%;
     margin: 0 auto;
     background-color: white;
     color: black;
+    table-layout: fixed;
 }
 
-div.experience_side {
-    float: left;
+.experience td:nth-child(1) {
+  width: 30%;
+}
+
+.experience td:nth-child(2) {
+  width: 70%;
+}
+
+td.experience_side {
     height: 100%;
     font-size:15px;
     font-weight: 200;
     padding: 20px;
+    vertical-align: top;
 }
 
 p.experience_title {
     font-size:20px;
     font-weight: 200;
+    width: 100%;
 }
 
 p.experience_company {
@@ -108,7 +118,31 @@ p.experience_time {
     font-weight: 200;
 }
 
-div.experience_main {
+@media (max-width: 800px) {
+    table.experience {
+        width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    table.experience {
+        width: 100%;
+    }
+
+    p.experience_title {
+        font-size:12px;
+    }
+
+    p.experience_company {
+        font-size:10px;
+    }
+
+    p.experience_time {
+        font-size:10px;
+    }
+}
+
+td.experience_main {
     height: 100%;
     font-size:15px;
     font-weight: 200;

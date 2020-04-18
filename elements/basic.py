@@ -43,6 +43,17 @@ class Div(PageElement):
         super().__init__("div", ("class=\"" + divclass + "\" " if divclass != "" else "") +
                          ("background=\"" + imagesource + "\"" if imagesource != "" else ""))
 
+class Table(PageElement):
+    def __init__(self, divclass=""):
+        super().__init__("table", ("class=\"" + divclass + "\" " if divclass != "" else ""))
+
+class Tr(PageElement):
+    def __init__(self, divclass=""):
+        super().__init__("tr", ("class=\"" + divclass + "\" " if divclass != "" else ""))
+
+class Td(PageElement):
+    def __init__(self, divclass=""):
+        super().__init__("td", ("class=\"" + divclass + "\" " if divclass != "" else ""))
 
 class Stylesheet(PageElement):
     def __init__(self, filename):
