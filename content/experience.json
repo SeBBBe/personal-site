@@ -4,8 +4,8 @@
       "title": "Software Engineer",
       "company": "Qlik",
       "time": "Jan 2016 - current",
-      "description": "At Qlik, my main focus is development and maintenance of tools for internal and external performance testing using an agile workflow. Part of this role is advocacy for performance testing within different development teams, and to drive testability and product quality by coordinating different parts of organization. I develop professional load testing tools specifically tailored to Qlik’s commercial software, mainly in .NET/C#. Some of my day-to-day tools include Groovy, Python, Powershell and Golang. As part of our performance monitoring, I have an active role in developing and maintaining our load testing cluster for automated tests. This includes our in-house cluster scheduling software, which I co-authored."
-    },
+      "description": "My role at Qlik is to develop, deploy and thoroughly test performance measurement software. With our team being involved in the very earliest planning of new product features, we always try to stay one step ahead of every potential problem.\nMy role is a unique combination of computer science, software development and people skills. Some of my work consists of facilitating different locations to align with the overall company goals, as well as helping customers realize their goals.\nIn a dynamic and forward-looking environment, I have the good fortune of getting to work with a mix of well established and new technologies, such as Golang, .NET/C#, Kubernetes, Angular, Groovy and Python."
+     },
     {
       "title": "Sales Representative",
       "company": "Länsförsäkringar",
